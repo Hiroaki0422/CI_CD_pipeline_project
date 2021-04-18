@@ -78,6 +78,7 @@ jobs:
           name: Unit Test Frontend
           command: |
             cd frontend
+            npm i
             npm run test 
 
                 
@@ -92,6 +93,7 @@ jobs:
           name: Unit Test Backend
           command: |
             cd backend
+            npm i 
             npm run test
 
             

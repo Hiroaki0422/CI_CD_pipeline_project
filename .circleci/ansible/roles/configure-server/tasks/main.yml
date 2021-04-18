@@ -1,0 +1,30 @@
+---
+- name: "update apt package"
+  become: yes
+  apt:
+    upgrade_cache: yes
+
+- name: "upgrade package"
+  become: yes
+  apt:
+    upgrade: yes
+
+- name: "remove dependencies that are no longer required"
+  become: yes
+  apt:
+    autoremove: yes
+
+- name: "installing node js"
+  become: yes
+  apt:
+    update_cache: yes
+    name: ["nodejs", "npm"]
+    state: present
+
+- name: "install prometheus2"
+  become: yes
+  npm:
+    name: pm2
+    global: yes
+    production: yes
+    state: present

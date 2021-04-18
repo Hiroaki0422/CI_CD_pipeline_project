@@ -75,10 +75,10 @@ jobs:
       - restore_cache:
           keys: [frontend-build] 
       - run: 
-        name: Unit Test Frontend
-        command: |
-          cd frontend
-          npm run test 
+          name: Unit Test Frontend
+          command: |
+            cd frontend
+            npm run test 
 
                 
   test-backend:
@@ -89,10 +89,10 @@ jobs:
       - restore_cache:
           keys: [backend-build]
       - run:
-        name: Unit Test Backend
-        command: |
-          cd backend
-          npm run test
+          name: Unit Test Backend
+          command: |
+            cd backend
+            npm run test
 
             
 #   scan-frontend:

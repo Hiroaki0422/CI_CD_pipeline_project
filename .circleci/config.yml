@@ -127,6 +127,11 @@ jobs:
       - image: amazon/aws-cli
     steps:
       - checkout
+      - run:
+          name: install dependencis
+          command: |
+            yum install -y tar
+            yum install -y gzip
       # - run:
       #     name: Ensure back-end infrastructure exists
       #     command: |

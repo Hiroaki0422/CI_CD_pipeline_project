@@ -139,14 +139,14 @@ jobs:
       #             --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" --output text) 
       #       curl -H "Content-Type: text/plain" -H "token: 3e8bea18-bb6f-4894-8b6a-676b3d860883" --request PUT \
       #            --data "$URL" https://api.memstash.io/values/url_${CIRCLE_WORKFLOW_ID:0:7}
-      - run:
-          name: Ensure front-end infrastructure exist
-          command: |
-            aws cloudformation deploy \
-              --template-file .circleci/files/frontend.yml \
-              --tags Key=Name, Value=frontend \
-              --stack-name "frontend-${CIRCLE_WORKFLOW_ID:0:7}"\
-              --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" 
+      # - run:
+      #     name: Ensure front-end infrastructure exist
+      #     command: |
+      #       aws cloudformation deploy \
+      #         --template-file .circleci/files/frontend.yml \
+      #         --tags Key=Name, Value=frontend \
+      #         --stack-name "frontend-${CIRCLE_WORKFLOW_ID:0:7}"\
+      #         --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" 
       - run:
           name: Add back-end ip to ansible inventory
           command: |
@@ -155,9 +155,9 @@ jobs:
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text >> .circleci/ansible/inventory.txt
       - persist_to_workspace:
-          root: ~/
+          root: .circleci/ansible
           paths:
-            - project/.circleci/ansible/inventory.txt
+            - inventory.txt
       # Here's where you will add some code to rollback on failure
       #- destroy-environments      
 

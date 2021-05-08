@@ -166,26 +166,26 @@ jobs:
       # Here's where you will add some code to rollback on failure
       #- destroy-environments      
 
-#   configure-infrastructure:
-#     docker:
-#       - image: python:3.7-alpine3.11
-#     steps:
-#       - checkout
-#       - add_ssh_keys:
-#           fingerprints: ["69:ef:2c:d0:14:7b:78:eb:53:7d:b7:d9:95:7f:ec:e2"]
-#       - attach_workspace:
-#           at: /tmp/ansible
-#       - run:
-#           name: Install dependencies
-#           command: |
-#             # Your code here
-#             apk add --
-#       - run:
-#           name: Configure server
-#           command: |
-#             # Your code here
-#             exit 1
-#       # Here's where you will add some code to rollback on failure      
+  configure-infrastructure:
+    docker:
+      - image: python:3.7-alpine3.11
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints: ["69:ef:2c:d0:14:7b:78:eb:53:7d:b7:d9:95:7f:ec:e2"]
+      - attach_workspace:
+          at: /tmp/ansible
+      - run:
+          name: Install dependencies
+          command: |
+            # Your code here
+            apk add --update ansible
+      - run:
+          name: Configure server
+          command: |
+            # Your code here
+            ansible-playbook -i ansible/inventory.txt configure-server.yml
+      # Here's where you will add some code to rollback on failure      
 
 #   run-migrations:
 #     docker:

@@ -184,7 +184,9 @@ jobs:
           name: Configure server
           command: |
             # Your code here
-            ansible-playbook -i /tmp/ansible/inventory.txt ansible/configure-server.yml
+            ls 
+            ansible-playbook -i /tmp/ansible/inventory.txt .circleci/ansible/configure-server.yml
+
       # Here's where you will add some code to rollback on failure      
 
 #   run-migrations:

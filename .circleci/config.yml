@@ -132,26 +132,26 @@ jobs:
           command: |
             yum install -y tar
             yum install -y gzip
-      # - run:
-      #     name: Ensure back-end infrastructure exists
-      #     command: |
-      #       aws cloudformation deploy \
-      #         --template-file .circleci/files/backend.yml \
-      #         --tags Key=Name,Value=backend \
-      #         --stack-name "backend-${CIRCLE_WORKFLOW_ID:0:7}" \
-      #         --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"
-      #       URL=$(aws ec2 describe-instances --region us-west-2 --query "Reservations[*].Instances[*].PublicIpAddress" \
-      #             --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" --output text) 
-      #       curl -H "Content-Type: text/plain" -H "token: 3e8bea18-bb6f-4894-8b6a-676b3d860883" --request PUT \
-      #            --data "$URL" https://api.memstash.io/values/url_${CIRCLE_WORKFLOW_ID:0:7}
-      # - run:
-      #     name: Ensure front-end infrastructure exist
-      #     command: |
-      #       aws cloudformation deploy \
-      #         --template-file .circleci/files/frontend.yml \
-      #         --tags Key=Name, Value=frontend \
-      #         --stack-name "frontend-${CIRCLE_WORKFLOW_ID:0:7}"\
-      #         --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" 
+      - run:
+          name: Ensure back-end infrastructure exists
+          command: |
+            aws cloudformation deploy \
+              --template-file .circleci/files/backend.yml \
+              --tags Key=Name,Value=backend \
+              --stack-name "backend-${CIRCLE_WORKFLOW_ID:0:7}" \
+              --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"
+            URL=$(aws ec2 describe-instances --region us-west-2 --query "Reservations[*].Instances[*].PublicIpAddress" \
+                  --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" --output text) 
+            curl -H "Content-Type: text/plain" -H "token: 3e8bea18-bb6f-4894-8b6a-676b3d860883" --request PUT \
+                 --data "$URL" https://api.memstash.io/values/url_${CIRCLE_WORKFLOW_ID:0:7}
+      - run:
+          name: Ensure front-end infrastructure exist
+          command: |
+            aws cloudformation deploy \
+              --template-file .circleci/files/frontend.yml \
+              --tags Key=Name, Value=frontend \
+              --stack-name "frontend-${CIRCLE_WORKFLOW_ID:0:7}"\
+              --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" 
       - run:
           name: Add back-end ip to ansible inventory
           command: |
@@ -201,10 +201,6 @@ jobs:
             # Your code here
             cd backend
             npm i 
-<<<<<<< HEAD
-=======
-            # npm audit fix --audit-level=critical --force
->>>>>>> test-feature-branch
             npm run migrations >> migrations.txt
       - run:
           name: check migration result

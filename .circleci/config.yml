@@ -201,6 +201,7 @@ jobs:
           command: |
             # Your code here
             cd backend
+            touch migrations.txt
             npm i 
             npm run migrations >> migrations.txt
       - run:

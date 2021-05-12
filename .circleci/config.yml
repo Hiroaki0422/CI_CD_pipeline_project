@@ -173,7 +173,7 @@ jobs:
     steps:
       - checkout
       - add_ssh_keys:
-          fingerprints: ["69:ef:2c:d0:14:7b:78:eb:53:7d:b7:d9:95:7f:ec:e2"]
+          fingerprints: ["ba:29:48:41:7d:78:5f:4c:20:a2:04:f6:bf:2e:69:f3"]
       - attach_workspace:
           at: /tmp/ansible
       - run:
@@ -269,7 +269,7 @@ jobs:
       - checkout
       # Add ssh keys with fingerprint
       - add_ssh_keys:
-          fingerprints: ["69:ef:2c:d0:14:7b:78:eb:53:7d:b7:d9:95:7f:ec:e2"]
+          fingerprints: ["ba:29:48:41:7d:78:5f:4c:20:a2:04:f6:bf:2e:69:f3"]
       # attach workspace
       - attach_workspace:
           at: /tmp/ansible

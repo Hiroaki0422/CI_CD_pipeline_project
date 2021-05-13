@@ -2,7 +2,7 @@
 - name: "update apt package"
   become: yes
   apt:
-    upgrade_cache: yes
+    update_cache: yes
 
 - name: "upgrade package"
   become: yes
